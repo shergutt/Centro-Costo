@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head th:fragment="head">
+    <title>CentroCosto</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+
+    <div class="main-content">
+        <header th:fragment="header" class="header">
+            <div class="header__container-tittle">
+                <div class="header__tittle-options">
+                    <a>Centro de Costos</a>
+                </div>
+            </div>
+        </header>
+        <div class="form-container">
+            <div class="form-container__tabs">
+                <button class="form-container__tab form-container__tab--active" id="login-tab">Iniciar Sesión</button>
+            </div>
+            <form id="login-form" class="form-container__form form-container__form--active" action="/login"
+                method="post">
+                <div class="form-container__field">
+                    <label for="login-email" class="form-container__label">Correo</label>
+                    <input type="email" id="login-email" name="email" class="form-container__input" required>
+                </div>
+                <div class="form-container__field">
+                    <label for="login-password" class="form-container__label">Contraseña</label>
+                    <input type="password" id="login-password" name="password" class="form-container__input" required>
+                </div>
+                <button type="submit" class="form-container__button">Iniciar Sesión</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    <footer h:fragment="footer" class="footer">
+        <a>@Centro de Costo</a>
+    </footer>
+</body>
+
+</html>
