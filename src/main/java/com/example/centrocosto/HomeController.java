@@ -11,10 +11,7 @@ public class HomeController {
         return "Home";
     }
 
-    @GetMapping("/presupuesto")
-    public String presupuesto() {
-        return "presupuesto";
-    }
+
 
     @GetMapping("/gastos")
     public String Gastos() {

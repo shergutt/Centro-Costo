@@ -27,29 +27,47 @@
             <a>Manejo de Presupuestos</a>
         </div>
         <div class="presupuestos__columns">
-            <button class="button--add">Anadir presupuesto</button>
-            <a class="button--add">$0</a>
+            <a th:href="@{/formulario-anadir-presupuesto}" class="button--add">Añadir Presupuesto</a>
+            <a class="button--add" th:text="${totalPresupuestado}">Total Presupuestado</a>
             <div class="presupuestos__tables-container">
                 <a class="tittle">Presupuestos</a>
                 <div class="tables">
+                    <div class="form-container">
+                        <form action="/anadir-rubro" method="post" class="form form--add-rubro">
+                            <input type="hidden" id="idRubro" name="idRubro"
+                                th:value="${rubroEditar != null ? rubroEditar['ID_rubro'] : ''}" />
+                            <div class="form__group">
+                                <label for="nombreRubro" class="form__label">Nombre del Rubro:</label>
+                                <input type="text" id="nombreRubro" name="nombreRubro" class="form__input"
+                                    th:value="${rubroEditar != null ? rubroEditar['nombre_rubro'] : ''}" required>
+                            </div>
+                            <button type="submit" class="form__button form__button--submit">Añadir/Editar Rubro</button>
+                        </form>
+                    </div>
                     <div class="presupuestos__table">
                         <table class="presupuestos__table-content">
                             <thead>
                                 <tr>
-                                    <th>rubro</th>
-                                    <th>cantidad</th>
-                                    <th>Precio</th>
-                                    <th>Eliminar</th>
-                                    <th>Editar</th>
+                                    <th>ID Rubro</th>
+                                    <th>Nombre del Rubro</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Rubro</td>
-                                    <td>3</td>
-                                    <td>$1000</td>
-                                    <td><button class="presupuestos__button-delete">Eliminar</button></td>
-                                    <td><button class="presupuestos__button-edit">Editar</button></td>
+                                <tr th:each="rubro : ${rubros}">
+                                    <td th:text="${rubro['ID_rubro']}"></td>
+                                    <td th:text="${rubro['nombre_rubro']}"></td>
+                                    <td>
+                                        <!-- Botones de acción como Eliminar o Editar -->
+                                        <form th:action="@{/eliminar-rubro}" method="post">
+                                            <input type="hidden" name="idRubro" th:value="${rubro['ID_rubro']}" />
+                                            <button type="submit" class="presupuestos__button-delete">Eliminar</button>
+                                        </form>
+
+                                        <a th:href="@{/editar-rubro(idRubro=${rubro['ID_rubro']})}"
+                                            class="presupuestos__button-edit">Editar</a>
+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -58,20 +76,34 @@
                         <table class="presupuestos__table-content">
                             <thead>
                                 <tr>
-                                    <th>Compra completada</th>
-                                    <th>Cantidad gastada</th>
+                                    <th>ID Presupuesto</th>
+                                    <th>ID Centro Costo</th>
+                                    <th>Rubro</th>
+                                    <th>Mes</th>
+                                    <th>Año</th>
+                                    <th>Monto Presupuestado</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Rubro</td>
-                                    <td>3</td>
+                                <tr th:each="presupuesto : ${presupuestos}">
+                                    <td th:text="${presupuesto['ID_presupuesto']}"></td>
+                                    <td th:text="${presupuesto['nombre_centro_costo']}"></td>
+                                    <td th:text="${presupuesto['nombre_rubro']}"></td>
+                                    <td th:text="${presupuesto['mes']}"></td>
+                                    <td th:text="${presupuesto['anio']}"></td>
+                                    <td th:text="${presupuesto['monto_presupuestado']}"></td>
+                                    <td>
+                                        <!-- Botones de acción como Eliminar o Editar -->
+                                        <button class="presupuestos__button-delete">Eliminar</button>
+                                        <button class="presupuestos__button-edit">Editar</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div>            
+            </div>
             <!-- Otros elementos según sea necesario -->
         </div>
     </section>

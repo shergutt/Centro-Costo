@@ -1,5 +1,7 @@
 package com.example.centrocosto;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -18,12 +20,15 @@ public class LoginController {
     @PostMapping("/login")
     public String login(@RequestParam String email, @RequestParam String password, HttpSession session, Model model) {
         try {
-            String sql = "SELECT validate_user_login(?, ?) FROM dual";
-            int result = jdbcTemplate.queryForObject(sql, Integer.class, email, password);
+            String sql = "SELECT ID_usuario, ID_centro_costo FROM usuarios WHERE correo_electronico = ? AND contrasena = ?";
+            Map<String, Object> user = jdbcTemplate.queryForMap(sql, email, password);
 
-            if (result == 1) {
+            if (user != null && !user.isEmpty()) {
                 // Inicio de sesión exitoso
                 session.setAttribute("userEmail", email); // Guardar correo en la sesión
+                session.setAttribute("userId", user.get("ID_usuario"));
+                session.setAttribute("userCentroCostoId", user.get("ID_centro_costo")); // Guardar ID_centro_costo en la
+                                                                                        // sesión
                 return "redirect:/home"; // Redirecciona a la página de inicio
             } else {
                 // Inicio de sesión fallido

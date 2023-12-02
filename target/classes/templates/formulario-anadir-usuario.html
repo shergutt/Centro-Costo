@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Añadir Usuario</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+
+<body>
+    <header th:fragment="header" class="header">
+        <div class="header__container-tittle">
+            <div class="header__tittle-options">
+                <a>Centro de Costos</a>
+            </div>
+        </div>
+        <div class="navbar">
+            <a th:href="@{/home}">Inicio</a>
+            <a th:href="@{/presupuesto}">Presupuesto</a>
+            <a th:href="@{/gastos}">Gastos</a>
+            <a>Reportes</a>
+            <a href="/usuarios">Usuarios</a>
+        </div>
+    </header>
+    <div class="content">
+        <div class="presupuesto__tittle">
+            <h1>Añadir Nuevo Usuario</h1>
+        </div>
+        <div class="form-container">
+            <form th:action="@{/usuarios/anadir}" method="post"
+                class="form-container__form form-container__form--active">
+                <div class="form-container__field">
+                    <label for="nombre" class="form-container__label">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-container__input" />
+                </div>
+                <div class="form-container__field">
+                    <label for="correo_electronico" class="form-container__label">Correo Electrónico</label>
+                    <input type="text" id="correo_electronico" name="correo_electronico"
+                        placeholder="Correo Electrónico" class="form-container__input" />
+                </div>
+                <div class="form-container__field">
+                    <label for="ID_centro_costo" class="form-container__label">ID Centro Costo</label>
+                    <input type="number" id="ID_centro_costo" name="ID_centro_costo" placeholder="ID Centro Costo"
+                        class="form-container__input" />
+                </div>
+                <div class="form-container__field">
+                    <label for="contrasena" class="form-container__label">Contraseña</label>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña"
+                        class="form-container__input" />
+                </div>
+                <button type="submit" class="form-container__button">Añadir Usuario</button>
+            </form>
+        </div>
+    </div>
+    <footer th:fragment="footer">
+        <a>@Centro de Costo</a>
+    </footer>
+</body>
+
+</html>
