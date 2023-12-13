@@ -27,7 +27,7 @@
             <a>Anadir Presupuesto</a>
         </div>
         <div class="formulario_presupuesto">
-            <form action="#" th:action="@{/formulario_anadir}" th:object="${presupuesto}" method="post">
+            <form th:action="${presupuesto != null and presupuesto.containsKey('ID_presupuesto') ? '/actualizar-presupuesto' : '/formulario_editar-presupuestos'}" method="post">
                 <div>
                     <label for="idCentroCosto">ID Centro de Costo:</label>
                     <select id="idCentroCosto" name="idCentroCosto" required>
@@ -55,7 +55,8 @@
                     <input type="number" id="montoPresupuestado" name="montoPresupuestado" required>
                 </div>
                 <div>
-                    <button type="submit">Agregar Presupuesto</button>
+                    <input type="hidden" name="ID_presupuesto" th:value="${presupuesto.ID_presupuesto}" />
+                    <button type="submit" th:text="${presupuesto.ID_presupuesto != null ? 'Actualizar Presupuesto' : 'Agregar Presupuesto'}"></button>
                 </div>
             </form>             
         </div>
@@ -66,7 +67,7 @@
         <script>
             window.onload = function() {
                 var fechaActual = new Date();
-                var mes = fechaActual.getMonth() + 1; // JavaScript cuenta los meses desde 0
+                var mes = fechaActual.getMonth() + 1;
                 var anio = fechaActual.getFullYear();
         
                 document.getElementById('mes').value = mes;

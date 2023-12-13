@@ -123,6 +123,13 @@ html {
     border: solid rgb(0, 0, 0);
 }
 
+.card-header{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .preview {
     display: flex;
     width: 100%;

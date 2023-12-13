@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head th:fragment="head">
+    <title>CentroCosto</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+
+<body>
+    <div class="main-content">
+        <header th:fragment="header" class="header">
+            <div class="header__container-tittle">
+                <div class="header__tittle-options">
+                    <a>Centro de Costos</a>
+                </div>
+            </div>
+            <div class="navbar">
+                <a th:href="@{/home}">Inicio</a>
+                <a th:href="@{/presupuesto}">Presupuesto</a>
+                <a th:href="@{/gastos}">Gastos</a>
+                <a th:href="@{/reportes}">Reportes</a>
+                <a href="/usuarios">Usuarios</a>
+            </div>
+        </header>
+        <!-- Tabla Desplegable para informe_usuarios -->
+        <div class="card">
+            <div class="card-header">
+                <button class="button--add btn btn-link" onclick="toggleTable('tablaInforme')">Informe Usuarios</button>
+            </div>
+            <div id="tablaInforme" class="collapse">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID Informe</th>
+                            <th>Accion</th>
+                            <th>ID Usuario</th>
+                            <th>Timestamp</th>
+                            <th>Detalles</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="informe : ${informeUsuarios}">
+                            <td th:text="${informe['informe_id']}"></td>
+                            <td th:text="${informe['accion']}"></td>
+                            <td th:text="${informe['usuario_id']}"></td>
+                            <td th:text="${informe['timestamp']}"></td>
+                            <td th:text="${informe['detalles']}"></td>
+                            <td th:text="${informe['nombre']}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <button class="button--add btn btn-link" onclick="toggleTable('tablaFacturas')">Facturas</button>
+            </div>
+            <div id="tablaFacturas" class="collapse">
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>ID Permiso</th>
+                        <th>Cantidad</th>
+                        <th>Monto</th>
+                        <th>Número Comprobante</th>
+                        <th>Fecha Compra</th>
+                    </tr>
+                    <tr th:each="factura : ${facturas}">
+                        <td th:text="${factura.factura_id}"></td>
+                        <td th:text="${factura.nombre}"></td>
+                        <td th:text="${factura.ID_permiso}"></td>
+                        <td th:text="${factura.cantidad}"></td>
+                        <td th:text="${factura.monto}"></td>
+                        <td th:text="${factura.numero_comprobante}"></td>
+                        <td th:text="${factura.fecha_compra}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+        <footer th:fragment="footer">
+            <a>@Centro de Costo</a>
+        </footer>
+    </div>
+    <script>
+        function toggleTable(id) {
+            var x = document.getElementById(id);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

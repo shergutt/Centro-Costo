@@ -17,7 +17,7 @@
             <a th:href="@{/home}">Inicio</a>
             <a th:href="@{/presupuesto}">Presupuesto</a>
             <a th:href="@{/gastos}">Gastos</a>
-            <a >Reportes</a>
+            <a th:href="@{/reportes}">Reportes</a>
             <a href="/usuarios">Usuarios</a>
         </nav>
     </header>
@@ -27,87 +27,70 @@
             <a>Manejo de Gastos</a>
         </div>
         <div class="gastos__center-padding">
-            <a class="button button--add center">$0</a>
-            <a class="button button--add center">$0</a>
+            <a th:href="@{/formulario-anadir-gasto}" class="button--add">Añadir Gasto</a>
+            <a class="button--add">Total Presupuestado: <span th:text="${montoTotal}"></span></a>
+            <a class="button--add">Monto en Proceso: <span th:text="${montoEnProceso}"></span></a>
+            <a class="button--add">Total Gastado: <span th:text="${montoGastado}"></span></a>
+           
         </div>
-
         <div class="gastos__columns">
-                <div class="gastos__table">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>rubro</th>
-                                <th>cantidad</th>
-                                <th>Precio</th>
-                                <th>Eliminar</th>
-                                <th>Editar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Rubro</td>
-                                <td>3</td>
-                                <td>$1000</td>
-                                <td><button class="button button--delete">Eliminar</button></td>
-                                <td><button class="button button--edit">Editar</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="gastos__table">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Compra completada</th>
-                                <th>Cantidad gastada</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Rubro</td>
-                                <td>3</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            
-            
-            <div class="gastos__rubro-container">
-                <div class="gastos__rubro">
-                    <select id="miMenuDesplegable" name="opciones">
-                        <option value="opcion1">Opción 1</option>
-                        <option value="opcion2">Opción 2</option>
-                        <option value="opcion3">Opción 3</option>
-                        <option value="opcion4">Opción 4</option>
-                    </select>
-                    <div class="gastos__cantidad-precio">
-                        <label for="cantidad">Cantidad:</label><br>
-                        <input type="text" id="cantidad" name="cantidad"><br>
-
-                        <label for="precio">Precio:</label><br>
-                        <input type="text" id="precio" name="precio"><br>
-
-                        <label class="gastos__verificacion">status</label><br>
-                        <button class="button-gastos">verificar</button>
-                        <button class="button-gastos">anadir</button>
-                    </div>
-                </div>
+            <div class="gastos__table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>rubro</th>
+                            <th>cantidad</th>
+                            <th>Precio</th>
+                            <th>Eliminar</th>
+                            <th>Comprar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="gasto : ${gastos}">
+                            <td th:text="${gasto['rubro']}"></td>
+                            <td th:text="${gasto['cantidad']}"></td>
+                            <td th:text="${gasto['precio']}"></td>
+                            <td>                                
+                                <form th:action="@{/eliminar-permiso-compra}" method="post">
+                                    <input type="hidden" name="idPermiso" th:value="${gasto['idPermiso']}">
+                                    <button type="submit" class="button button--delete">Eliminar</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form th:action="@{/comprar}" method="post">
+                                    <input type="hidden" name="idPermiso" th:value="${gasto['idPermiso']}">
+                                    <button type="submit" class="button button--edit">Comprar</button>
+                                </form>                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="gastos__table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Rubro</th>
+                            <th>Cantidad gastada</th>
+                            <th># comprobante</th>
+                            <th>Fecha comprobante</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="detalle : ${comprasDetalles}">
+                            <td th:text="${detalle['rubro']}"></td>
+                            <td th:text="${detalle['cantidadGastada']}"></td>
+                            <td th:text="${detalle['numeroComprobante']}"></td>
+                            <td th:text="${#dates.format(detalle['fechaComprobante'], 'dd/MM/yyyy')}"></td>
+                        </tr>
+                    </tbody>
+                </table>                
             </div>
         </div>
     </section>
     <footer th:fragment="footer" class="footer">
         <a>@Centro de Costo</a>
     </footer>
-    <script>
-        // Obtener la referencia al elemento select
-        var selectElement = document.getElementById('miMenuDesplegable');
-
-        // Agregar un oyente de eventos para el evento change
-        selectElement.addEventListener('change', function () {
-            // Mostrar el valor seleccionado en la consola
-            console.log('Opción seleccionada:', selectElement.value);
-        });
-    </script>
 </body>
 
 </html>

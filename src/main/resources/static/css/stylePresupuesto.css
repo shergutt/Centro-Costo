@@ -75,7 +75,7 @@ html {
     background-color: rgb(100, 100, 100);
     display: flex;
     flex-direction: column;
-    height: 100%;
+    
 }
 
 .presupuestos {
@@ -248,4 +248,52 @@ td {
     background-color: #ffffff;
     color: #000;
     border: solid 1px;
+}
+/* Estilos específicos para el formulario de presupuestos */
+.formulario_presupuesto {
+    max-width: 600px; /* Ancho máximo del formulario */
+    margin: 20px auto; /* Centrado con margen */
+    padding: 20px; /* Espaciado interno */
+    background-color: #ffffff; /* Fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra sutil */
+}
+
+/* Estilo para los campos del formulario y etiquetas */
+.formulario_presupuesto div {
+    margin-bottom: 15px; /* Espacio entre campos */
+}
+
+.formulario_presupuesto label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* Texto en negrita */
+}
+
+/* Estilo para los campos de entrada */
+.formulario_presupuesto input[type="number"],
+.formulario_presupuesto select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+/* Estilo para el botón de envío */
+.formulario_presupuesto button {
+    background-color: #000000; /* Fondo negro */
+    color: #ffffff; /* Texto blanco */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Transición suave al cambiar el color */
+}
+
+.formulario_presupuesto button:hover {
+    background-color: #ffffff; /* Fondo blanco al pasar el mouse */
+    color: #000000; /* Texto negro al pasar el mouse */
+    border: solid 1px; /* Borde al pasar el mouse */
 }

@@ -17,7 +17,7 @@
             <a th:href="@{/home}">Inicio</a>
             <a th:href="@{/presupuesto}">Presupuesto</a>
             <a th:href="@{/gastos}">Gastos</a>
-            <a>Reportes</a>
+            <a th:href="@{/reportes}">Reportes</a>
             <a href="/usuarios">Usuarios</a>
         </div>
     </header>
@@ -30,8 +30,11 @@
             <form action="#" th:action="@{/formulario_anadir}" th:object="${presupuesto}" method="post">
                 <div>
                     <label for="idCentroCosto">ID Centro de Costo:</label>
-                    <input type="number" id="idCentroCosto" name="idCentroCosto" required>
-                </div>
+                    <select id="idCentroCosto" name="idCentroCosto" required>
+                        <option value="">Seleccione un Centro de Costo</option>
+                        <option th:each="centro : ${centrosCosto}" th:value="${centro['ID_centro_costo']}" th:text="${centro['nombre_centro_costo']}"></option>
+                    </select>
+                </div>                
                 <div>
                     <label for="idRubro">Rubro:</label>
                     <select id="idRubro" name="idRubro" required>
@@ -52,18 +55,11 @@
                     <input type="number" id="montoPresupuestado" name="montoPresupuestado" required>
                 </div>
                 <div>
-                    <label for="montoReal">Monto Real:</label>
-                    <input type="number" id="montoReal" name="montoReal">
-                </div>
-                <div>
-                    <label for="montoGastado">Monto Gastado:</label>
-                    <input type="number" id="montoGastado" name="montoGastado">
-                </div>
-                <div>
                     <button type="submit">Agregar Presupuesto</button>
                 </div>
             </form>             
         </div>
+    </section>
         <footer h:fragment="footer" class="footer">
             <a>@Centro de Costo</a>
         </footer>

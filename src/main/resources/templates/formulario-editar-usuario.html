@@ -26,29 +26,22 @@
             <h1>Añadir Nuevo Usuario</h1>
         </div>
         <div class="form-container">
-            <form th:action="@{/usuarios/anadir}" method="post"
-                class="form-container__form form-container__form--active">
+            <form th:action="@{/editar-usuario}" method="post">
+                <input type="hidden" name="ID_usuario" th:value="${usuario.ID_usuario}" />
                 <div class="form-container__field">
                     <label for="nombre" class="form-container__label">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Nombre" class="form-container__input" />
+                    <input type="text" id="nombre" name="nombre" th:value="${usuario.nombre}" placeholder="Nombre" class="form-container__input" />
                 </div>
                 <div class="form-container__field">
                     <label for="correo_electronico" class="form-container__label">Correo Electrónico</label>
-                    <input type="text" id="correo_electronico" name="correo_electronico"
-                        placeholder="Correo Electrónico" class="form-container__input" />
-                </div>
-                <div class="form-container__field">
-                    <label for="ID_centro_costo" class="form-container__label">ID Centro Costo</label>
-                    <input type="number" id="ID_centro_costo" name="ID_centro_costo" placeholder="ID Centro Costo"
-                        class="form-container__input" />
+                    <input type="text" id="correo_electronico" name="correo_electronico" th:value="${usuario.correo_electronico}" placeholder="Correo Electrónico" class="form-container__input" />
                 </div>
                 <div class="form-container__field">
                     <label for="contrasena" class="form-container__label">Contraseña</label>
-                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña"
-                        class="form-container__input" />
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" class="form-container__input" />
                 </div>
-                <button type="submit" class="form-container__button">Añadir Usuario</button>
-            </form>
+                <button type="submit" class="form-container__button">Editar Usuario</button>
+            </form>            
         </div>
     </div>
     <footer th:fragment="footer">

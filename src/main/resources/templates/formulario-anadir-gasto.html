@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <title>CentroCosto</title>
+    <link rel="stylesheet" type="text/css" href="css/stylePresupuesto.css" />
+</head>
+
+<body>
+    <header th:fragment="header" class="header">
+        <div class="header__container-tittle">
+            <div class="header__tittle-options">
+                <a>Centro de Costos</a>
+            </div>
+        </div>
+        <div class="navbar">
+            <a th:href="@{/home}">Inicio</a>
+            <a th:href="@{/presupuesto}">Presupuesto</a>
+            <a th:href="@{/gastos}">Gastos</a>
+            <a th:href="@{/reportes}">Reportes</a>
+            <a href="/usuarios">Usuarios</a>
+        </div>
+    </header>
+
+    <section class="presupuestos">
+        <div class="presupuestos__title">
+            <a>Anadir Gasto</a>
+        </div>
+        <div class="formulario_presupuesto">
+            <form action="#" th:action="@{/crear-permiso-compra}" th:object="${gasto}" method="post">
+                <div class="gastos__rubro-container">
+                    <div class="gastos__rubro">
+                        <select id="miMenuDesplegable" name="idRubro">
+                            <option value="">Seleccione un Rubro</option>
+                            <option th:each="rubro : ${rubros}" 
+                                    th:value="${rubro['ID_rubro']}" 
+                                    th:text="${rubro['nombre_rubro']}">
+                            </option>
+                        </select>                    
+                        <div class="gastos__cantidad-precio">
+                            <label for="cantidad">Cantidad:</label><br>
+                            <input type="text" id="cantidad" name="cantidad"><br>
+            
+                            <label for="precio">Precio:</label><br>
+                            <input type="text" id="monto" name="monto"><br>
+                            <div th:if="${message}">
+                                <p th:text="${message}"></p>
+                            </div>                            
+                            <button class="button-gastos" type="submit">verificar</button>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </form>        
+        </div>
+    </section>
+        <footer h:fragment="footer" class="footer">
+            <a>@Centro de Costo</a>
+        </footer>
+        <script>
+            
+            document.getElementById('addButton').addEventListener('click', function() {
+                window.location.href = '/gastos';
+            });
+        </script>
+        </body>
+
+        </html>
